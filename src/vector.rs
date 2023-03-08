@@ -26,11 +26,9 @@ impl Vector {
     self.data.len()
   }
 
-  pub fn dot(&self, rhs: Vector) -> f32 {
+  pub fn dot(&self, rhs: &Vector) -> f32 {
     let mut res = 0_f32;
-    if self.data.len() != rhs.data.len() {
-      panic!("Cannot find Dot Product for vectors of unequal size.");
-    }
+    assert_eq!(self.data.len(), rhs.data.len());
 
     for i in 0..self.data.len() {
       res += self.data[i]*rhs.data[i];
