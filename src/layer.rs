@@ -1,31 +1,18 @@
 
 // ===== Imports =====
-use crate::neuron::Neuron;
-use crate::vector::Vector;
+use nalgebra::{DMatrix, DVector, Dyn, OMatrix, U1};
 // ===================
 
 pub struct Layer {
-  input_size: usize,
-  neurons: Vec<Neuron>,
+  weights: OMatrix<f32, Dyn, Dyn>,
+  biases: OMatrix<f32, Dyn, U1>,
 }
 
 impl Layer {
-  pub fn new(input_size: usize, num_neurons: usize) -> Self {
-    let mut neurons = vec![];
-    for _ in 0..num_neurons {
-      neurons.push(Neuron::new(input_size));
-    }
-    Self { input_size, neurons }
-  }
+  pub fn new(num_neurons: usize, num_weights: usize) -> Self {
+    let weights = DMatrix::from_fn(num_neurons, num_weights, |_, _| rand::random());
+    let biases = DVector::identity(num_neurons);
 
-  pub fn process(&mut self, input: &Vector) -> Vector {
-    assert_eq!(input.len(), self.input_size);
-    let mut data = vec![];
-    for neuron in self.neurons.iter_mut() {
-      let res = neuron.process(input);
-      data.push(res);
-    }
-
-    Vector::from(data)
+    Self { weights, biases }
   }
 }

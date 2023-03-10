@@ -6,3 +6,4 @@ edition = "2021"
 [dependencies]
 nannou = "0.18"
 nalgebra = "0.32"
+rand = "0.8"
