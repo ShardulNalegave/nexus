@@ -4,6 +4,9 @@ use nalgebra::{DMatrix, DVector, Dyn, MatrixSum, OMatrix, U1};
 // ===================
 
 pub struct Layer {
+  pub num_neurons: usize,
+  pub input_size: usize,
+  pub output_size: usize,
   weights: OMatrix<f32, Dyn, Dyn>,
   biases: OMatrix<f32, Dyn, U1>,
 }
@@ -13,7 +16,11 @@ impl Layer {
     let weights = DMatrix::from_fn(num_neurons, num_weights, |_, _| rand::random());
     let biases = DVector::identity(num_neurons);
 
-    Self { weights, biases }
+    Self {
+      num_neurons, weights, biases,
+      input_size: num_weights,
+      output_size: num_neurons,
+    }
   }
 
   pub fn weights(&self) -> OMatrix<f32, Dyn, Dyn> {
