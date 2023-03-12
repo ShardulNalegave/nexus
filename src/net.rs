@@ -7,7 +7,7 @@ use crate::yaml::NeuralNetworkDescriptor;
 pub struct NeuralNet {
   pub input_size: usize,
   pub output_size: usize,
-  layers: Vec<Layer>,
+  pub(crate) layers: Vec<Layer>,
 }
 
 impl NeuralNet {
