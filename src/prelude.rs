@@ -1,4 +1,5 @@
 
+pub use nalgebra;
 pub use crate::{
-  neuron::Neuron,
+  layer::Layer
 };

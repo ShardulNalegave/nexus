@@ -1,6 +1,6 @@
 
 // ===== Imports =====
-use nalgebra::{DMatrix, DVector, Dyn, OMatrix, U1};
+use nalgebra::{DMatrix, DVector, Dyn, MatrixSum, OMatrix, U1};
 // ===================
 
 pub struct Layer {
@@ -14,5 +14,17 @@ impl Layer {
     let biases = DVector::identity(num_neurons);
 
     Self { weights, biases }
+  }
+
+  pub fn weights(&self) -> OMatrix<f32, Dyn, Dyn> {
+    self.weights.clone()
+  }
+
+  pub fn biases(&self) -> OMatrix<f32, Dyn, U1> {
+    self.biases.clone()
+  }
+
+  pub fn predict_batch(&self, input: OMatrix<f32, Dyn, Dyn>) -> MatrixSum<f32, Dyn, Dyn, Dyn, U1> {
+    (input * &self.weights.transpose()) + &self.biases
   }
 }
