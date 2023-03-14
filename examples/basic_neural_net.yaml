@@ -1,6 +1,7 @@
 input_size: 3
 layers:
-  -
-    neurons: 3
-  -
-    neurons: 2
+  - neurons: 4
+  - neurons: 3
+  - neurons: 5
+  - neurons: 3
+  - neurons: 2
